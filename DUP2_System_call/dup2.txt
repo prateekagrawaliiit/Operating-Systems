@@ -1,0 +1,2 @@
+This is the output to the file named dup2.txt
+This is the output to the file named dup2.txt
