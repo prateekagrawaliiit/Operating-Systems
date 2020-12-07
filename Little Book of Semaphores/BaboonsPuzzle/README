@@ -1,0 +1,47 @@
+In the baboon crossing problem, a number of baboons are located on the edges of a deep canyon. There are baboons on both sides and, as you have probably guessed, some of the baboons on the left side want to get to the right side, and vice versa. Fortunately, a large rope has been stretched across the abyss allowing baboons to cross by brachiation: hanging from the rope and swinging hand-over-hand to the other side.
+
+The baboon crossing policy must be compatible with the constraints of the situation:
+
+    1. If two baboons meet in the middle of the rope, then all activity stops, and no other baboons can cross (deadlock). So, at any given time, all the baboons on the rope must be going the same direction.
+    2. The rope can hold only a certain number of baboons at a time. A baboon cannot be allowed on the rope if the rope is already at full capacity.
+    3. A continuous stream of baboons from one direction could prevent baboons wanting to go the opposite direction from ever being able to cross (unfairness, starvation).
+
+
+Design Notes:
+1. A flag to control the current direction of flow.
+2. A counting semaphore for the number of baboons possible on the rope.
+3. If the direction of flow is different from the direction a new baboon wants to go then no additional baboons can be added in the same direction of current flow.
+
+Input:
+Number of Baboons.
+Output:
+Baboon "k" climbed [ON] the rope in direction "a".
+Baboon "l" climbed [ON] the rope in direction "a".
+Baboon "m" will [WAIT] till all the baboons in direction "a" finish before climbing in direction "b".
+Baboon "k" climbed [OFF] the rope in direction "a".
+Baboon "o" will [WAIT] till all the baboons waiting in direction "b" have climbed on and off.
+Baboon "l" climbed [OFF] the rope in direction "a"
+
+Conditions:
+Random generator that decides the direction of crossing per baboon.
+Random time generator between 1-6 seconds that each baboon has to wait before crossing the canyon.
+All baboons take a constant time of 3 seconds to cross the canyon in any direction.
+
+
+Design:
+Globals:
+1. Direction enable flags
+2. Baboon counts in each direction that are to cross before the direction of crossing can flip.
+3. All the semaphores.
+ 
+
+Functions :
+1. Things needed to setup the baboon:
+a) SetupBaboon function:
+   1. Direction of crossiing.
+   2. Crossing time. 
+2. Rope setup:
+a) Init function to setup semaphores:
+   1. rope max semaphore.
+   2. direction of crossing semaphore.
+
